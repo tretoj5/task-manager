@@ -79,4 +79,18 @@ describe('TaskList', () => {
     expect(wrapper.emitted('change-status')).toEqual([[task.id, 'in_progress']])
     expect(wrapper.emitted('edit')).toEqual([[task]])
   })
+
+  it('only marks the task being updated as changing', () => {
+    const changing = createTask({ id: 4 })
+    const other = createTask({ id: 5, title: 'Revisar el informe' })
+    const wrapper = mountList({ tasks: [changing, other], statusChangingId: 4 })
+
+    const buttons = wrapper.findAll('button[aria-label^="Avanzar"]')
+
+    expect(buttons).toHaveLength(2)
+    expect(buttons[0]!.attributes('disabled')).toBeDefined()
+    expect(buttons[0]!.text()).toContain('Guardando')
+    expect(buttons[1]!.attributes('disabled')).toBeUndefined()
+    expect(buttons[1]!.text()).toContain('Avanzar estado')
+  })
 })

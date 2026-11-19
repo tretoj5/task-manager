@@ -40,7 +40,7 @@ function handleStatusChange(id: number, status: TaskStatus): void {
         v-for="task in tasks"
         :key="task.id"
         :task="task"
-        :status-changing="statusChangingId !== null"
+        :status-changing="statusChangingId === task.id"
         @edit="emit('edit', $event)"
         @change-status="handleStatusChange"
       />
