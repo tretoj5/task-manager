@@ -2,6 +2,8 @@
   "name": "task-manager",
   "private": true,
   "scripts": {
+    "dev": "scripts/setup.sh && cd backend && ./vendor/bin/sail logs -f",
+    "down": "cd backend && ./vendor/bin/sail down",
     "test": "npm run test:backend && npm run test:frontend",
     "test:backend": "cd backend && ./vendor/bin/sail artisan test",
     "test:frontend": "docker compose -f backend/compose.yaml exec frontend npm test",
