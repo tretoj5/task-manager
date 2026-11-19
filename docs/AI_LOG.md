@@ -45,3 +45,9 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Request: verify setup, test-database isolation, CORS, API/UI flows, persistence, and repository hygiene from a fresh local clone.
 - Accepted decisions: used a distinct Docker project and temporary host-port overrides so the existing development services remained untouched; all overrides stayed in the disposable clone.
 - Verification: repeated setup completed with migrations current; all 12 backend and 10 frontend tests passed; health and task-list requests returned 200; CORS allowed the clone's origin; browser create, edit, status, filters, search, and pagination worked; the edited task persisted after setup and reload; no `.env`, dependency, or guide files were tracked.
+
+## Delivery documentation
+
+- Request: document setup, commands, API behavior, design decisions, and out-of-scope items in Spanish.
+- Accepted decisions: use the root `README.md` as the single project guide and remove generated framework/template READMEs that contained unrelated setup instructions.
+- Verification: checked documented commands and API parameters against the root npm scripts, Sail setup script, routes, and Form Requests; kept the user-provided test guide excluded from Git.

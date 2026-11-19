@@ -7,3 +7,9 @@ Record only simplifications or improvements that are actually left outside this 
 - `DESIGN.md` does not specify a focus-ring treatment; the interface uses the guide's blue link color for a visible focus ring.
 - Form control height and dialog dimensions are not specified; the form uses 48px controls and a dialog capped at 650px for consistency with the guide's spacing and layout scale.
 - The modal backdrop is derived from the guide's ink color with transparency because no overlay color is defined.
+
+## Out of scope
+
+- Authentication, user accounts, and role-based access are intentionally omitted; the delivered interface is a shared task board.
+- Task deletion is not exposed because it is not part of the specified API contract.
+- Queues, caching, and soft deletes are excluded to keep the technical-test implementation small and synchronous.
