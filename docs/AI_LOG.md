@@ -20,3 +20,9 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Accepted decisions: keep query filtering in `Task::scopeFilter`, use parameterized PostgreSQL `ILIKE` with escaped `%` and `_`, and make the task seeder skip an already-populated table.
 - Correction: the first create smoke test found that PostgreSQL's column default was not present on the in-memory Eloquent model before resource serialization; set the model's `pending` default as well as the migration default.
 - Verification: created, edited, searched, changed status, tested literal wildcard searches, checked unchanged versus changed past dates, and confirmed 201/422/404 responses using temporary data that was removed afterward.
+
+## Backend feature tests
+
+- Request: cover the API contract with Pest feature tests and isolate each test against PostgreSQL's `testing` database.
+- Accepted decisions: configure `RefreshDatabase` for feature tests and explicitly set the PostgreSQL test connection in `phpunit.xml`.
+- Verification: all 12 backend tests passed, including pagination, combined filters, wildcard escaping, create/update/status, past-date behavior, and JSON errors.
