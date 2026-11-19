@@ -166,7 +166,7 @@ function submitForm(): void {
         >
           <option value="pending">Pendiente</option>
           <option value="in_progress">En curso</option>
-          <option value="done">Hecha</option>
+          <option value="done">Completada</option>
         </select>
         <span v-if="fieldError('status')" id="task-status-error" class="field-error">
           {{ fieldError('status') }}

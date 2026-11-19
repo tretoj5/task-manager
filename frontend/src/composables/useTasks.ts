@@ -135,9 +135,9 @@ export function useTasks() {
     await loadTasks()
   }
 
-  async function changeStatus(id: number, status: TaskStatus): Promise<void> {
+  async function changeStatus(id: number, status: TaskStatus): Promise<boolean> {
     if (statusChangingId.value !== null) {
-      return
+      return false
     }
 
     statusChangingId.value = id
@@ -146,12 +146,14 @@ export function useTasks() {
     try {
       await updateTaskStatus(id, status)
       await loadTasks()
+      return true
     } catch (reason: unknown) {
       error.value = reason instanceof ApiError
         ? reason.message
         : reason instanceof Error
           ? reason.message
           : 'No se pudo cambiar el estado de la tarea.'
+      return false
     } finally {
       statusChangingId.value = null
     }

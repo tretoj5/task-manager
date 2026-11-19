@@ -30,7 +30,7 @@ function updateValue(event: Event): void {
       <option value="">Todos los estados</option>
       <option value="pending">Pendiente</option>
       <option value="in_progress">En curso</option>
-      <option value="done">Hecha</option>
+      <option value="done">Completada</option>
     </select>
   </label>
 </template>

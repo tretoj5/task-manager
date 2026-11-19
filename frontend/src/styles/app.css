@@ -104,7 +104,6 @@ button:disabled {
   position: absolute;
   inset: var(--space-primary-base) 0 0;
   border-radius: var(--radius-action);
-  background: var(--color-action-base);
 }
 
 .primary-action__face {
@@ -257,6 +256,28 @@ button:disabled {
 }
 
 .error-banner p {
+  margin: 0;
+}
+
+.toast-notification {
+  position: fixed;
+  z-index: var(--z-toast);
+  right: var(--space-3);
+  bottom: var(--space-3);
+  display: flex;
+  width: min(var(--container-toast), calc(100vw - 2 * var(--space-3)));
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: var(--border-width) solid var(--color-badge-ink);
+  border-radius: var(--radius-card);
+  background: var(--color-mint-card);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+}
+
+.toast-notification p {
   margin: 0;
 }
 

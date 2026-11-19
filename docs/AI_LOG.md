@@ -57,3 +57,8 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Review findings: the API capped title-search input at 100 characters although the contract specifies no such limit, and the task dialog referenced a missing accessible title element.
 - Corrections: removed the undocumented search cap, added a regression test for longer queries, and connected the dialog's `aria-labelledby` to its heading with an App test.
 - Final verification: 13 backend tests (100 assertions), 10 frontend tests, frontend typecheck and production build, and Pint all passed.
+
+## Success notifications
+
+- Request: show toast notifications after successful task creation, editing, and status changes.
+- Accepted decisions: use one polite, dismissible toast at a time; it closes automatically after five seconds, and a failed status request does not show success.

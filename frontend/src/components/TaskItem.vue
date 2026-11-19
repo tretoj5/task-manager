@@ -15,7 +15,7 @@ const emit = defineEmits<{
 const statusLabels: Record<TaskStatus, string> = {
   pending: 'Pendiente',
   in_progress: 'En curso',
-  done: 'Hecha',
+  done: 'Completada',
 }
 
 const nextStatus: Partial<Record<TaskStatus, TaskStatus>> = {

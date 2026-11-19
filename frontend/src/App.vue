@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import AssigneeFilter from './components/AssigneeFilter.vue'
 import Pagination from './components/Pagination.vue'
 import SearchBox from './components/SearchBox.vue'
 import StatusFilter from './components/StatusFilter.vue'
 import TaskForm from './components/TaskForm.vue'
 import TaskList from './components/TaskList.vue'
+import ToastNotification from './components/ToastNotification.vue'
 import { ApiError } from './api/client'
 import { useTasks } from './composables/useTasks'
-import type { ApiValidationErrors, Task, TaskFormData } from './types'
+import type { ApiValidationErrors, Task, TaskFormData, TaskStatus } from './types'
 
 const {
   tasks,
@@ -36,6 +37,14 @@ const editingTask = ref<Task | null>(null)
 const formSubmitting = ref(false)
 const formServerErrors = ref<ApiValidationErrors>({})
 const submissionError = ref('')
+const successMessage = ref('')
+let toastTimeout: ReturnType<typeof setTimeout> | null = null
+
+const statusLabels: Record<TaskStatus, string> = {
+  pending: 'Pendiente',
+  in_progress: 'En curso',
+  done: 'Completada',
+}
 
 watch(isFormOpen, async (open) => {
   await nextTick()
@@ -50,6 +59,23 @@ watch(isFormOpen, async (open) => {
     createButton.value?.focus()
   }
 })
+
+function dismissToast(): void {
+  if (toastTimeout !== null) {
+    clearTimeout(toastTimeout)
+    toastTimeout = null
+  }
+
+  successMessage.value = ''
+}
+
+function showToast(message: string): void {
+  dismissToast()
+  successMessage.value = message
+  toastTimeout = setTimeout(dismissToast, 5000)
+}
+
+onBeforeUnmount(dismissToast)
 
 function resetFormErrors(): void {
   formServerErrors.value = {}
@@ -92,8 +118,10 @@ async function submitForm(data: TaskFormData): Promise<void> {
   try {
     if (editingTask.value) {
       await update(editingTask.value.id, data)
+      showToast('La tarea se actualizó correctamente.')
     } else {
       await create(data)
+      showToast('La tarea se creó correctamente.')
     }
 
     isFormOpen.value = false
@@ -108,6 +136,14 @@ async function submitForm(data: TaskFormData): Promise<void> {
     }
   } finally {
     formSubmitting.value = false
+  }
+}
+
+async function handleStatusChange(id: number, status: TaskStatus): Promise<void> {
+  const changed = await changeStatus(id, status)
+
+  if (changed) {
+    showToast(`La tarea pasó a «${statusLabels[status]}».`)
   }
 }
 </script>
@@ -147,7 +183,7 @@ async function submitForm(data: TaskFormData): Promise<void> {
         :status-changing-id="statusChangingId"
         @retry="reload"
         @edit="openEditForm"
-        @change-status="changeStatus"
+        @change-status="handleStatusChange"
       />
 
       <Pagination :meta="meta" :loading="loading" @page-change="goToPage" />
@@ -172,5 +208,7 @@ async function submitForm(data: TaskFormData): Promise<void> {
         @field-change="resetFormErrors"
       />
     </dialog>
+
+    <ToastNotification :message="successMessage" @dismiss="dismissToast" />
   </div>
 </template>
