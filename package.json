@@ -1,0 +1,11 @@
+{
+  "name": "task-manager",
+  "private": true,
+  "scripts": {
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && ./vendor/bin/sail artisan test",
+    "test:frontend": "docker compose -f backend/compose.yaml exec frontend npm test",
+    "typecheck": "docker compose -f backend/compose.yaml exec frontend npm run typecheck",
+    "lint:backend": "cd backend && ./vendor/bin/sail pint --test"
+  }
+}
