@@ -26,3 +26,10 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Request: cover the API contract with Pest feature tests and isolate each test against PostgreSQL's `testing` database.
 - Accepted decisions: configure `RefreshDatabase` for feature tests and explicitly set the PostgreSQL test connection in `phpunit.xml`.
 - Verification: all 12 backend tests passed, including pagination, combined filters, wildcard escaping, create/update/status, past-date behavior, and JSON errors.
+
+## Vue task interface
+
+- Request: replace the temporary health screen with the task management interface, including search and filters, pagination, create/edit, status changes, and API error states.
+- Accepted decisions: keep server state in `useTasks`, share one validated `TaskForm` for creation and editing, and use native modal dialog behavior with focus restoration.
+- Design decisions: use the guide's blue link color for visible focus, 48px form controls, a 650px dialog maximum, and a translucent ink-derived backdrop where the guide is silent; see `docs/FUTURE.md`.
+- Correction: Vue component events pass multiple arguments separately; forward status-change arguments through a typed handler instead of indexing `$event`.
