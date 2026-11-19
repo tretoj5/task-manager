@@ -33,3 +33,9 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Accepted decisions: keep server state in `useTasks`, share one validated `TaskForm` for creation and editing, and use native modal dialog behavior with focus restoration.
 - Design decisions: use the guide's blue link color for visible focus, 48px form controls, a 650px dialog maximum, and a translucent ink-derived backdrop where the guide is silent; see `docs/FUTURE.md`.
 - Correction: Vue component events pass multiple arguments separately; forward status-change arguments through a typed handler instead of indexing `$event`.
+
+## Frontend tests
+
+- Request: cover local form validation and API 422 field errors, list loading/empty/error/retry states, task actions, search debounce, and request cancellation.
+- Accepted decisions: test components with Vue Test Utils and exercise `useTasks` through a mounted harness while mocking the API boundary.
+- Verification: all 10 Vitest tests passed; the frontend typecheck and production build passed.
