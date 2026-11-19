@@ -58,6 +58,12 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Corrections: removed the undocumented search cap, added a regression test for longer queries, and connected the dialog's `aria-labelledby` to its heading with an App test.
 - Final verification: 13 backend tests (100 assertions), 10 frontend tests, frontend typecheck and production build, and Pint all passed.
 
+## API authentication decision
+
+- Request: explain in the README whether the API should require a token.
+- Accepted decision: keep the API public because the specification defines no users or roles, and document the reasoning instead of adding auth. A fixed token sent from the frontend is visible in the Vite bundle and protects nothing; a real scheme would need users, login, 401 handling and their tests.
+- Documentation: added an authentication and security section to the README, and noted Sanctum, per-assignee policies and `throttle` as future work in `docs/FUTURE.md`.
+
 ## Success notifications
 
 - Request: show toast notifications after successful task creation, editing, and status changes.
