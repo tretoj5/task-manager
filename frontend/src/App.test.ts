@@ -69,6 +69,8 @@ describe('App', () => {
 
     await wrapper.get('button.primary-action').trigger('click')
     await flushPromises()
+    expect(wrapper.get('dialog').attributes('aria-labelledby')).toBe('task-form-title')
+    expect(wrapper.get('#task-form-title').text()).toBe('Nueva tarea')
     await wrapper.get('#task-title').setValue('Revisar informe')
     await wrapper.get('#task-assignee').setValue('María')
     await wrapper.get('form').trigger('submit')

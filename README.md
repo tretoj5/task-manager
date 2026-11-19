@@ -91,7 +91,7 @@ Los errores de validación devuelven `422` con `message` y errores por campo. La
 | --- | --- |
 | `status` | Filtra por `pending`, `in_progress` o `done`. |
 | `assignee` | Filtra por coincidencia exacta del nombre; admite hasta 60 caracteres. |
-| `q` | Busca texto parcial de hasta 100 caracteres en el título, sin distinguir mayúsculas; los comodines se tratan como texto literal. |
+| `q` | Busca texto parcial en el título, sin distinguir mayúsculas; los comodines se tratan como texto literal. |
 | `page` | Número de página, desde 1. |
 | `per_page` | Elementos por página; predeterminado 10, mínimo 1 y máximo 50. |
 

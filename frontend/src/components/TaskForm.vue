@@ -99,7 +99,7 @@ function submitForm(): void {
     <header class="task-form__header">
       <div>
         <p class="eyebrow">{{ task ? 'Actualiza los detalles' : 'Añade una tarea' }}</p>
-        <h2>{{ task ? 'Editar tarea' : 'Nueva tarea' }}</h2>
+        <h2 id="task-form-title">{{ task ? 'Editar tarea' : 'Nueva tarea' }}</h2>
       </div>
       <button
         class="icon-button"

@@ -75,6 +75,12 @@ it('treats percent and underscore in search terms literally', function () {
         ->assertJsonPath('data.0.title', 'Ship 100%_complete report');
 });
 
+it('accepts search terms longer than one hundred characters', function () {
+    $this->getJson('/api/tasks?q='.str_repeat('x', 101))
+        ->assertOk()
+        ->assertJsonCount(0, 'data');
+});
+
 it('creates a trimmed task with pending status by default', function () {
     $response = $this->postJson('/api/tasks', [
         'title' => '  Review API contract  ',

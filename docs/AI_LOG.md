@@ -51,3 +51,9 @@ Record significant requests, accepted decisions, and corrections actually made h
 - Request: document setup, commands, API behavior, design decisions, and out-of-scope items in Spanish.
 - Accepted decisions: use the root `README.md` as the single project guide and remove generated framework/template READMEs that contained unrelated setup instructions.
 - Verification: checked documented commands and API parameters against the root npm scripts, Sail setup script, routes, and Form Requests; kept the user-provided test guide excluded from Git.
+
+## Final review
+
+- Review findings: the API capped title-search input at 100 characters although the contract specifies no such limit, and the task dialog referenced a missing accessible title element.
+- Corrections: removed the undocumented search cap, added a regression test for longer queries, and connected the dialog's `aria-labelledby` to its heading with an App test.
+- Final verification: 13 backend tests (100 assertions), 10 frontend tests, frontend typecheck and production build, and Pint all passed.

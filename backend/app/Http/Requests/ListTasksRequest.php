@@ -39,7 +39,7 @@ class ListTasksRequest extends FormRequest
         return [
             'status' => ['sometimes', 'nullable', Rule::enum(TaskStatus::class)],
             'assignee' => ['sometimes', 'nullable', 'string', 'max:60'],
-            'q' => ['sometimes', 'nullable', 'string', 'max:100'],
+            'q' => ['sometimes', 'nullable', 'string'],
             'page' => ['sometimes', 'integer', 'min:1'],
             'per_page' => ['sometimes', 'integer', 'min:1', 'max:50'],
         ];
